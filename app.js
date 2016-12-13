@@ -1,10 +1,10 @@
 'use strict';
 
 var allProducts = []
-
-// var newArray = []
-// var oldArray = []
+var newArray = []
+var oldArray = []
 var displayImages = document.getElementById('image_container');
+var showResults = document.getElementById('show_results');
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
@@ -23,14 +23,12 @@ function ProductImage(productName) {
 for (var i = 0; i < names.length; i++){
   new ProductImage(names[i]);
 }
+
 console.table(allProducts);
 
 function randNum() {   //generate random numbers
   return Math.floor(Math.random()*allProducts.length);
 }
-
-var newArray = [];
-var oldArray = [];
 
 //generate array of three random numbers
 function makeArrayofThreeNumbers(){
@@ -85,13 +83,10 @@ showThreePics();
 function handleClick(event) {
 
   event.preventDefault(); //prevents reload of data
-
   console.log(event.target.src + 'was clicked');
 
   if (event.target.id === 'image_container') {
-
-    return alert('Please click on a picture, not the background!'); //this still needs to be tested
-
+    return alert('Please click on a picture, not the background!');
   }
 //tally the clicks
   if(event.target.id === 'left') {
@@ -109,68 +104,30 @@ function handleClick(event) {
   //
   clickCounter += 1;
   console.log(clickCounter + 'total clicks so far')
+  showThreePics();
+
   if (clickCounter >= 5){  //change to 25 when done testing
-  //   picContainer.removeEventListener('click', handleClick);
-  // //   showResults.style.visibility = 'visible';  //show results button appears at end of test
+    displayImages.removeEventListener('click', handleClick);
+    showResults.style.visibility = 'visible';  //show results button appears at end of test
   }
 }
-showThreePics();
-// function renderList(){
-//   //display a list of items and total clicks/views
-// }
-// function handleResults() {
-//   // show table....
-//   console.log(event.target + 'was clicked');
-// }
-// //add eventListener for clicks
-displayImages.addEventListener('click', handleClick);
 
-//add eventListener for results
-// var showResults = document.getElementById('show_results');
-// showResults.addEventListener('click', handleResults);
-// showResults.style.visibility = 'hidden' //this hides the submit button before 25 clicks
+var resultList = document.getElementById('result_list');
+function displayList() {
+  displayImages.innerHTML = '';
+  for (var i = 0; i < allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = allProducts[i].productName + ' has been clicked ' + allProducts[i].clicks + ' times and viewed ' + allProducts[i].views + ' times';
+    resultList.appendChild(liEl);
+  }
+}
 
-//count click for each product
-// function countClicks {
-//   if (event.target.id === 'left') {
-//     allProducts[leftRandomIndexes].clicks += 1;
-//     console.log(allProducts[leftRandomIndexes].productName + ' ' + allProducts[leftRandomIndexes].clicks);
-//   }
-//   if (event.target.id === 'center') {
-//     allProducts[centerRandomIndexes].clicks += 1;
-//     console.log(allProducts[centerRandomIndexes].productName + ' ' + allProducts[centerRandomIndexes].clicks);
-//   }
-//   if (event.target.id === 'right') {
-//     allProducts[rightRandomIndexes].clicks += 1;
-//     console.log(allProducts[rightRandomIndexes].productName + ' ' + allProducts[rightRandomIndexes].clicks);
-//   }
-//   totalClicks += 1;
-//
-//   if (totalClicks > 10){
-//   picContainer.removeEventListener('click', handleClick);
-//   }
-// }
-//
-//   while (leftRandomIndexes === centerRandomIndexes || leftRandomIndexes === rightRandomIndexes || centerRandomIndexes === rightRandomIndexes) {
-//     var leftRandomIndexes = Math.floor(Math.random()*allProducts.length);
-//     console.log(leftRandomIndexes);
-//     var centerRandomIndexes = Math.floor(Math.random()*allProducts.length);
-//     console.log(centerRandomIndexes);
-//     var rightRandomIndexes = Math.floor(Math.random()*allProducts.length);
-//     console.log(rightRandomIndexes);
-//   } //if they are all different numbers, then set the source with code below
-//
-//   var left = document.getElementById('left');
-//   left.src = allProducts[leftRandomIndexes].filePath;
-//   allProducts[leftRandomIndexes].views += 1;  //add to the views total
-//
-//   var center = document.getElementById('center');
-//   center.src = allProducts[centerRandomIndexes].filePath;
-//   allProducts[centerRandomIndexes].views += 1;
-//
-//   var right = document.getElementById('right');
-//   right.src = allProducts[rightRandomIndexes].filePath;
-//   allProducts[rightRandomIndexes].views += 1;
-//
-// }
-// showThreePics();
+//display a list of items and total clicks/views
+function handleResults() {
+  console.log(event.target + 'was clicked');
+  displayList();
+}
+
+displayImages.addEventListener('click', handleClick); //add eventListener for clicks
+showResults.addEventListener('click', handleResults);  //add eventListener for results button
+showResults.style.visibility = 'hidden' //this hides the submit button before 25 clicks
