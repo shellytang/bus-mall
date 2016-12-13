@@ -31,7 +31,6 @@ new ProductImage('usb','images/usb.jpg');
 new ProductImage('watercan','images/water-can.jpg');
 new ProductImage('wineglass','images/wineglass.jpg');
 
-
 function selectRandomImages() {
   var leftRandomIndexes = Math.floor(Math.random()*allProducts.length);
   var left = document.getElementById('left');
