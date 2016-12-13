@@ -1,6 +1,4 @@
 'use strict';
-var left = document.getElementById('left');
-left.src = allProducts[randomIndexes[0]].src;
 
 var allProducts = [] //all image objects, like stores / images have names and filepath
 // var displayImages = document.getElementById('image_container');
@@ -33,17 +31,19 @@ new ProductImage('usb','images/usb.jpg');
 new ProductImage('watercan','images/water-can.jpg');
 new ProductImage('wineglass','images/wineglass.jpg');
 
+
 function selectRandomImages() {
-  var randomIndexes = Math.floor(Math.random()*allProducts.length);
+  var leftRandomIndexes = Math.floor(Math.random()*allProducts.length);
   var left = document.getElementById('left');
-  left.src = allProducts[randomIndexes[0]].src;
+  left.src = allProducts[leftRandomIndexes].filepath;
 
-  randomIndexes = Math.floor(Math.random()*allProducts.length);
+  var centerRandomIndexes = Math.floor(Math.random()*allProducts.length);
   var center = document.getElementById('center');
-  center.src = allProducts[randomIndexes[1]].src;
+  center.src = allProducts[centerRandomIndexes].filepath;
 
-  randomIndexes = Math.floor(Math.random()*allProducts.length);
+  var rightRandomIndexes = Math.floor(Math.random()*allProducts.length);
   var right = document.getElementById('right');
-  right.src = allProducts[randomIndexes[2]].src;
+  right.src = allProducts[rightRandomIndexes].filepath;
 }
+
 selectRandomImages();
