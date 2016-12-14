@@ -4,6 +4,7 @@ var allProducts = []
 var newArray = []
 var oldArray = []
 var votes = [];
+var views = [];
 var chartDrawn = false;
 var productChart;
 var displayImages = document.getElementById('image_container');
@@ -116,7 +117,7 @@ function handleResults() {
 }
 function updateChartArrays() {
   for (var i = 0; i < allProducts.length; i++) {
-    // productListing[i] = allProducts[i].productName;   do we need this?
+    views[i] = allProducts[i].views; //takes the views and puts
     votes[i] = allProducts[i].clicks;  //takes the clicks and puts into array
   }
 }
@@ -125,7 +126,7 @@ displayImages.addEventListener('click', handleClick); //eventListener for clicks
 showResults.addEventListener('click', handleResults);  //eventListener for results button
 showResults.style.visibility = 'hidden' //this hides the submit button before 25 clicks
 
-//chart stuff below
+// chart stuff below
 function drawChart () {
   var ctx = document.getElementById('result_chart').getContext('2d');
   productChart = new Chart(ctx, {
@@ -194,6 +195,7 @@ function drawChart () {
   });
   chartDrawn = true;
 }
+
 if (chartDrawn) {
   productChart.update();
 }
