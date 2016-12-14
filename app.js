@@ -102,7 +102,7 @@ function handleClick(event) {
   showThreePics();
 
   if (clickCounter >= 5){  //change to 25 when done testing
-    updateChartArrays();
+    // updateChartArrays(); //when test is over, push over the clicks to the array for chart
     displayImages.removeEventListener('click', handleClick);
     showResults.style.visibility = 'visible';  //show results button appears at end of test
   }
@@ -122,6 +122,7 @@ function displayList() {    //shows list when ou click on the see results button
 //display a list of items and total clicks/views
 function handleResults() {
   console.log(event.target + 'was clicked');
+  updateChartArrays();
   displayList();
   drawChart(); //new line
 }
