@@ -1,10 +1,11 @@
 body {
   font-family: sans-serif;
-  background-color: #E6EBE0
+  background-color: #E6EBE0;
 }
 img {
-  width: 300px;
-  height: 300px;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
   margin: 30px;
   border: 3px solid black;
 }
@@ -21,9 +22,12 @@ h1 {
 button {
   font-size: 12px;
   color: #000;
-  padding: 10px;
+  padding: 5px;
   border-radius: 3px;
 }
 button:hover {
   background-color: #ED6A5A;
+}
+#image_container {
+  margin-left: 150px;
 }
