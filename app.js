@@ -94,7 +94,7 @@ function handleClick(event) {
   clickCounter += 1;
   console.log(clickCounter + ' total clicks so far')
   showThreePics();
-  if (clickCounter >= 5){
+  if (clickCounter >= 25){
     displayImages.removeEventListener('click', handleClick);
     showResults.style.visibility = 'visible';  //show results button appears at end of test
   }
