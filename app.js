@@ -14,6 +14,8 @@ var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
 var clickCounter = 0;
+var myStorage = [];
+
 
 var names = ['bag','banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass']
 
@@ -25,11 +27,13 @@ function ProductImage(productName) {
   allProducts.push(this);
 }
 //create instances by passing thru names which makes the prodcutname and filepath properties
-for (var i = 0; i < names.length; i++){
-  new ProductImage(names[i]);
+function createArray() {
+  for (var i = 0; i < names.length; i++){
+    console.log(' making an array');
+    new ProductImage(names[i]);
+  }
 }
-
-console.table(allProducts);
+// console.table(allProducts);
 function randNum() {   //generate random numbers for products
   return Math.floor(Math.random()*allProducts.length);
 }
@@ -71,29 +75,36 @@ function showThreePics() {    //this will get three pics and tally the views
   right.src = allProducts[newArray[2]].filePath;
   allProducts[newArray[2]].views +=1;
 }
-showThreePics();
+// showThreePics();
 
 function handleClick(event) {
   event.preventDefault(); //prevents reload of data
-  console.log(event.target.src + 'was clicked'); //alert if dont click on pics
+  // console.log(event.target.src + 'was clicked'); //alert if dont click on pics
   if (event.target.id === 'image_container') {
     return alert('Please click on a picture, not the background!');
   }
 //tally the clicks
   if(event.target.id === 'left') {
     allProducts[newArray[0]].clicks +=1;
-    console.log(allProducts[newArray[0]]);
+    // console.log(allProducts[newArray[0]]);
   }
   if(event.target.id === 'center') {
     allProducts[newArray[1]].clicks +=1;
-    console.log(allProducts[newArray[1]]);
+    // console.log(allProducts[newArray[1]]);
   }
   if(event.target.id === 'right') {
     allProducts[newArray[2]].clicks +=1;
-    console.log(allProducts[newArray[2]]);
+    // console.log(allProducts[newArray[2]]);
   }
   clickCounter += 1;
-  console.log(clickCounter + ' total clicks so far')
+  // console.log(clickCounter + ' total clicks so far'
+//********************************************************************************************
+
+
+  localStorage.setItem('myStorage', JSON.stringify(allProducts));
+
+
+// *******************************************************************************************
   showThreePics();
   if (clickCounter >= 25){
     displayImages.removeEventListener('click', handleClick);
@@ -110,7 +121,7 @@ function displayList() {    //shows list when you click on the see results butto
 }
 //display a list of items and total clicks/views
 function handleResults() {
-  console.log(event.target + 'was clicked');
+  // console.log(event.target + 'was clicked');
   updateChartArrays();
   displayList();
   drawChart(); //new line
@@ -121,6 +132,24 @@ function updateChartArrays() {
     votes[i] = allProducts[i].clicks;  //takes the clicks and puts into array
   }
 }
+// ************************************Check for local storage******************************************
+function checkForStorage() {
+
+  if (!localStorage.myStorage) {
+    console.log('no local');
+    createArray();
+    showThreePics();
+  } else {
+    console.log(' yes local');
+    var tempDataHolder = localStorage.getItem('myStorage');
+    var parseData = JSON.parse(tempDataHolder);
+    allProducts = parseData;
+    showThreePics();
+  }
+}
+// ****************** start program ****************************
+checkForStorage()
+// //******************************************************************************************
 
 displayImages.addEventListener('click', handleClick); //eventListener for clicks
 showResults.addEventListener('click', handleResults);  //eventListener for results button
@@ -196,6 +225,6 @@ function drawChart () {
   chartDrawn = true;
 }
 
-if (chartDrawn) {
-  productChart.update();
-}
+// if (chartDrawn) {
+//   productChart.update();
+// }
