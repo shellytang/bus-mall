@@ -105,7 +105,6 @@ function handleResults() {  //display a list of items and total clicks/views
   displayList();
   drawChart();
 }
-
 // ************ Chart stuff ***********************
 function updateChartArrays() {
   for (var i = 0; i < allProducts.length; i++) {
