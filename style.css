@@ -10,11 +10,12 @@ img {
   border: 3px solid black;
 }
 h1 {
-  text-align: center;
+  margin-left: 230px;
 }
 .instructions {
   width: 950px;
   margin-left: 30px;
+  text-align: center;
 }
 .button {
   text-align: center;
@@ -30,4 +31,10 @@ button:hover {
 }
 #image_container {
   margin-left: 150px;
+}
+#result_list {
+  margin-top: 20px;
+}
+#result_chart {
+  margin-top: 20px;
 }
